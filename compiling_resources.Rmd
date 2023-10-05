@@ -1,0 +1,36 @@
+---
+title: "Resources to Help Me Make My First Shiny App"
+output: html_notebook
+---
+
+The [Starbucks data](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-12-21/readme.md) are from a 2021 Tidy Tuesday. There is also an inspirational [Behance infographic](https://www.behance.net/gallery/58743971/Starbucks-Menu-Infographic-Design).
+
+See the in-built examples in the package folder. There are even examples for uploading (Example 9) and download files (Example 10).
+
+The online version of [Mastering Shiny](https://mastering-shiny.org/index.html) is a key resource.
+
+See the [Shiny website](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html) for a quick-start guide. The guide provides a way to access the in-built examples through {shiny} in the console:
+
+|                            |                              |
+|:-------------------------- |:-----------------------------|
+|runExample("01_hello")      | a histogram                  |
+|runExample("02_text")       | tables and data frames       |
+|runExample("03_reactivity") | a reactive expression        |
+|runExample("04_mpg")        | global variables             |
+|runExample("05_sliders")    | slider bars                  |
+|runExample("06_tabsets")    | tabbed panels                |
+|runExample("07_widgets")    | help text and submit buttons |
+|runExample("08_html")       | Shiny app built from HTML    |
+|runExample("09_upload")     | file upload wizard           |
+|runExample("10_download")   | file download wizard         |
+|runExample("11_timer")      | an automated timer           |
+
+This [Introduction to R Shiny](https://www.youtube.com/watch?v=P7T5haMRYwk) tutorial by an Appsilon employee was presented to the Tunis RUG. There is an accompanying [GitHub repository](https://github.com/aniaskrzydlo/intro-to-shiny-hands-on-workshop).
+
+This is an Appsilon article on how to implement [infinite scrolling in a Shiny app](https://appsilon.com/infinite-scrolling-in-r-shiny/).
+
+There was a R-Ladies STL presentation on [dynamic reporting using a Shiny app](https://www.meetup.com/rladies-st-louis/events/282720794/).See the [video tutorial](https://www.youtube.com/watch?v=MvGAstDzLJk) and YouTube and the [project files](https://github.com/winterstat/RLadiesSTL-shinyreports/tree/main) on GitHub; the slides are no longer on the presenter's website.
+
+See this straightforward [dependent selectInput objects tutorial](https://heds.nz/posts/dependent-selectInputs-shiny/). It was last updated in November 2022. See the [accompanying code on GitLab](https://gitlab.com/hedsnz/hedsnz-public/-/blob/main/r/dependent-selectInputs-shiny.R). This tutorial indicates that the solution will work with both selectInput() and selectizeInput(). The difference being that selectizeInput() has more parameters and allows users to type to search dropdown menu. See more information and examples on the [Shiny website](https://shiny.posit.co/r/articles/build/selectize/) and [selectize.js website](https://selectize.dev/).
+
+[Maya Gans](https://maya.rbind.io/resume) has a great R-Ladies Tunis presentation on [A Little JS Goes a Long Way](https://alittlejs.netlify.app/#1); there is an [accompanying video](https://www.youtube.com/watch?v=a_umFne86K8). She has another presentation highilight the beauty of combining JS and R: [JS + R == Amazing Applications | Understanding HTMLWidgets](https://phuseus-jsandr.netlify.app/#1). Maya is one of the authors of [*JavaScript for Data Science*](https://third-bit.com/js4ds/).

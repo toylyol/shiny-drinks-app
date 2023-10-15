@@ -1,0 +1,26 @@
+{
+    "id": "4FB469D3",
+    "path": "~/GitHub/shiny-drinks-app/playing_in_sandbox.R",
+    "project_path": "playing_in_sandbox.R",
+    "type": "r_source",
+    "hash": "1854808810",
+    "contents": "",
+    "dirty": false,
+    "created": 1697325177160.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "20,20",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1697334067,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1697334067110,
+    "read_only": false,
+    "read_only_alternatives": []
+}

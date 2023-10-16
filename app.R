@@ -30,64 +30,55 @@ starbucks <- raw_data |>
 
 ui <- fluidPage(
   
-  selectInput("select_cat", 
+  selectInput(inputId = "select_cat", 
               label = "Category", 
               choices = sort(unique(starbucks$category)),
-              multiple = TRUE,
-              selectize = TRUE
-              ),
-  uiOutput("select_bev"), # name child
-  uiOutput("select_size"), # name grandchild
+              multiple = TRUE),
+  selectInput(inputId = "select_bev",
+              label = "Drinks",
+              choices = NULL,
+              multiple = TRUE),
+  selectInput(inputId = "select_size",
+              label = "Size",
+              choices = NULL,
+              multiple = TRUE),
   tableOutput("table")
   
 )
 
 server <- function(input, output, session) {
   
-  output$select_bev <- renderUI({
-    drinks <- starbucks %>%
-      filter(category %in% input$select_cat) %>%
-      pull(product_name) %>%
-      unique() %>%
-      sort()
-    
-    selectInput("select_bev", 
-                label = "Drink",
-                choices = drinks,
-                multiple = TRUE
-    )
+  category <- reactive({
+    filter(starbucks, category %in% input$select_cat)
   })
   
-  output$select_size <- renderUI({
-    sizes <- starbucks %>%
-      filter(product_name %in% input$select_bev) %>%
-      pull(size) %>%
-      unique() %>%
+  observeEvent(category(), {
+    choices <- category()$product_name |> 
+      unique() |> 
       sort()
-
-    selectInput("select_size", "Size",
-                choices = sizes,
-                multiple = TRUE
-    )
+    updateSelectInput(inputId = "select_bev", choices = choices) 
   })
   
-  dataset <- reactive({
-    
-    req(input$select_cat)
-    
-    starbucks |> 
-      filter(category %in% input$select_cat)
+  drinks <- reactive({
+    req(input$select_bev)
+    filter(category(), product_name %in% input$select_bev)
+  })
+  
+  observeEvent(drinks(), {
+    choices <- drinks()$size |> 
+      unique() |> 
+      sort()
+    updateSelectInput(inputId = "select_size", choices = choices)
   })
   
   output$table <- renderTable({
-    dataset()
+    req(input$select_size)
+    drinks() %>% 
+      filter(size %in% input$select_size)
   })
   
 }
 
 shinyApp(ui, server)
 
-# https://www.linkedin.com/pulse/shiny-app-r-integrating-filter-multiple-dynamic-conditions-lee-rock/
-# https://community.rstudio.com/t/reactive-filter-using-multiple-inputs-in-shiny/28974
-# https://www.davidsolito.com/post/conditional-drop-down-in-shiny/
-# https://mastering-shiny.org/action-dynamic.html 
+# See Chapter 10.1.2 at https://mastering-shiny.org/action-dynamic.html#hierarchical-select

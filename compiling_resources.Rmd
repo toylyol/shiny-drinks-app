@@ -3,6 +3,8 @@ title: "Resources to Help Me Make My First Shiny App"
 output: html_notebook
 ---
 
+# Resources
+
 The [Starbucks data](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-12-21/readme.md) are from a 2021 Tidy Tuesday. There is also an inspirational [Behance infographic](https://www.behance.net/gallery/58743971/Starbucks-Menu-Infographic-Design).
 
 See the in-built examples in the package folder. There are even examples for uploading (Example 9) and download files (Example 10).
@@ -25,6 +27,8 @@ See the [Shiny website](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1
 |runExample("10_download")   | file download wizard         |
 |runExample("11_timer")      | an automated timer           |
 
+The Shiny website has a helpful [layout guide](https://shiny.posit.co/r/articles/build/layout-guide/) that explains how to add panels.
+
 This [Introduction to R Shiny](https://www.youtube.com/watch?v=P7T5haMRYwk) tutorial by an Appsilon employee was presented to the Tunis RUG. There is an accompanying [GitHub repository](https://github.com/aniaskrzydlo/intro-to-shiny-hands-on-workshop).
 
 This is an Appsilon article on how to implement [infinite scrolling in a Shiny app](https://appsilon.com/infinite-scrolling-in-r-shiny/).
@@ -38,4 +42,21 @@ See this straightforward [dependent selectInput objects tutorial](https://heds.n
 There are materials from a [Web Design for Shiny Devs](https://webdesign4shiny.rinterface.com/) workshop available online. It was hosted by Maya Gans and David Granjon.
 
 See the R4DS Online Learning Community [companion guide](https://r4ds.github.io/bookclub-shinyui/) to David Granjon's [Outstanding User Interfaces with Shiny](https://unleash-shiny.rinterface.com/index.html).
+
+There is an [Awesome Shiny Extensions](https://github.com/nanxstats/awesome-shiny-extensions) GitHub repository that details extension packages for making Shiny applications extra swanky. 
+
+There is a specific output function for use with {reactable}: [reactableOutput](https://glin.github.io/reactable/reference/reactable-shiny.html).
+
+See this blogpost on [shinyWidgets::pickerInput() function](https://copyprogramming.com/howto/shiny-selectinput-to-select-all-from-dropdown).
+
+Per [this StackOverflow forum](https://stackoverflow.com/questions/74653162/how-to-create-dynamic-filters-in-my-r-shiny-app-to-automatically-update-the-valu), it seems that the functionality I am seeking comes out-of-the-box with [shinyWidgets's SelectizeGroupUI() function](https://dreamrs.github.io/shinyWidgets/reference/selectizeGroup-module.html).
+
+See how to create a [basic pop-up](https://stackoverflow.com/questions/73306444/r-shiny-popup-window-when-hovering-over-icon) in this StackOverflow forum.
+
+
+# *Mastering Shiny* Notes
+
+See Chapter 2.2.8 for information on [action buttons](https://shiny.posit.co/r/articles/build/layout-guide/). There is further information on how to configure an action button with an [on-click event](https://mastering-shiny.org/basic-reactivity.html#on-click) in Chapter 3.3.5. It requires use of eventReactive().
+
+[Chapter 3.3.5](https://mastering-shiny.org/basic-reactivity.html#execution-order) notes that, unlike other R code, "the order in which reactive code is run is determined only by the reactive graph, not by its layout in the server function."
 

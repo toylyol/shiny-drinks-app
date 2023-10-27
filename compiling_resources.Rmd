@@ -53,6 +53,8 @@ Per [this StackOverflow forum](https://stackoverflow.com/questions/74653162/how-
 
 See how to create a [basic pop-up](https://stackoverflow.com/questions/73306444/r-shiny-popup-window-when-hovering-over-icon) in this StackOverflow forum.
 
+Several articles([LinkedIn](https://www.linkedin.com/pulse/shiny-app-r-integrating-filter-multiple-dynamic-conditions-lee-rock/), [RStudio Community](https://community.rstudio.com/t/reactive-filter-using-multiple-inputs-in-shiny/28974), [blog post](https://www.davidsolito.com/post/conditional-drop-down-in-shiny/)) that helped with designing the dataset filtering.
+
 
 # *Mastering Shiny* Notes
 

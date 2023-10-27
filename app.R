@@ -26,9 +26,6 @@ starbucks <- raw_data |>
   mutate(product_name = str_to_title(product_name)) |> 
   mutate(size = str_to_title(size))
 
-plot(raw_data$calories, raw_data$sugar_g)
-
-
 
 # Create the app itself
 
@@ -95,7 +92,15 @@ server <- function(input, output, session) {
   })
   
   output$chart <- renderPlot({
-    plot(dataset()$calories, dataset()$sugar_g)
+    
+    ggplot() +
+      geom_point(data = dataset(), 
+                 aes(x = calories, y = sugar_g, 
+                     size = caffeine_mg, color = category),
+                 alpha = 0.5) +
+      scale_size(range = c(0, 10)) + 
+      theme_minimal()
+    
     })
   
   output$table <- renderReactable({
@@ -106,6 +111,10 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 
-# https://www.linkedin.com/pulse/shiny-app-r-integrating-filter-multiple-dynamic-conditions-lee-rock/
-# https://community.rstudio.com/t/reactive-filter-using-multiple-inputs-in-shiny/28974
-# https://www.davidsolito.com/post/conditional-drop-down-in-shiny/
+# TODO:
+# Choose different variable to scale radius.
+# Choose color scheme. 
+# Choose different variable to tie to color scheme.
+# Fix coordinate system and legends.
+# Convert using ggplotly().
+

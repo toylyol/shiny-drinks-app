@@ -55,7 +55,6 @@ See how to create a [basic pop-up](https://stackoverflow.com/questions/73306444/
 
 Several articles([LinkedIn](https://www.linkedin.com/pulse/shiny-app-r-integrating-filter-multiple-dynamic-conditions-lee-rock/), [RStudio Community](https://community.rstudio.com/t/reactive-filter-using-multiple-inputs-in-shiny/28974), [blog post](https://www.davidsolito.com/post/conditional-drop-down-in-shiny/)) that helped with designing the dataset filtering.
 
-
 # *Mastering Shiny* Notes
 
 See Chapter 2.2.8 for information on [action buttons](https://shiny.posit.co/r/articles/build/layout-guide/). There is further information on how to configure an action button with an [on-click event](https://mastering-shiny.org/basic-reactivity.html#on-click) in Chapter 3.3.5. It requires use of eventReactive().

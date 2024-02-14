@@ -37,9 +37,9 @@ There was a R-Ladies STL presentation on [dynamic reporting using a Shiny app](h
 
 See this straightforward [dependent selectInput objects tutorial](https://heds.nz/posts/dependent-selectInputs-shiny/). It was last updated in November 2022. See the [accompanying code on GitLab](https://gitlab.com/hedsnz/hedsnz-public/-/blob/main/r/dependent-selectInputs-shiny.R). This tutorial indicates that the solution will work with both selectInput() and selectizeInput(). The difference being that selectizeInput() has more parameters and allows users to type to search dropdown menu. See more information and examples on the [Shiny website](https://shiny.posit.co/r/articles/build/selectize/) and [selectize.js website](https://selectize.dev/).
 
-[Maya Gans](https://maya.rbind.io/resume) has a great R-Ladies Tunis presentation on [A Little JS Goes a Long Way](https://alittlejs.netlify.app/#1); there is an [accompanying video](https://www.youtube.com/watch?v=a_umFne86K8). She has another presentation highilight the beauty of combining JS and R: [JS + R == Amazing Applications | Understanding HTMLWidgets](https://phuseus-jsandr.netlify.app/#1). Maya is one of the authors of [*JavaScript for Data Science*](https://third-bit.com/js4ds/).
+[Maya Gans](https://maya.rbind.io/resume) has a great R-Ladies Tunis [A Little JS Goes a Long Way](https://alittlejs.netlify.app/#1) presentation; there is an [accompanying video](https://www.youtube.com/watch?v=a_umFne86K8). She has another presentation highlight the beauty of combining JS and R: [JS + R == Amazing Applications | Understanding HTMLWidgets](https://phuseus-jsandr.netlify.app/#1). Maya is one of the authors of [*JavaScript for Data Science*](https://third-bit.com/js4ds/).
 
-There are materials from a [Web Design for Shiny Devs](https://webdesign4shiny.rinterface.com/) workshop available online. It was hosted by Maya Gans and David Granjon.
+There are materials from a [Web Design for Shiny Devs](https://webdesign4shiny.rinterface.com/) workshop available online. It was hosted by Maya Gans and David Granjon. It provides a nice introduction to {bslib}. There is also a recommendation for an awesome [color picker from Adobe](https://color.adobe.com/create/color-wheel). *
 
 See the R4DS Online Learning Community [companion guide](https://r4ds.github.io/bookclub-shinyui/) to David Granjon's [Outstanding User Interfaces with Shiny](https://unleash-shiny.rinterface.com/index.html).
 
@@ -54,6 +54,12 @@ Per [this StackOverflow forum](https://stackoverflow.com/questions/74653162/how-
 See how to create a [basic pop-up](https://stackoverflow.com/questions/73306444/r-shiny-popup-window-when-hovering-over-icon) in this StackOverflow forum.
 
 Several articles([LinkedIn](https://www.linkedin.com/pulse/shiny-app-r-integrating-filter-multiple-dynamic-conditions-lee-rock/), [RStudio Community](https://community.rstudio.com/t/reactive-filter-using-multiple-inputs-in-shiny/28974), [blog post](https://www.davidsolito.com/post/conditional-drop-down-in-shiny/)) that helped with designing the dataset filtering.
+
+Adding a side panel and pills (as an alternative to tabsets) were easy to add using [{bslib} reference page](https://rstudio.github.io/bslib/reference/navset.html#details) and [Posit Shiny help article](https://shiny.posit.co/r/articles/build/tabsets/) that was updated in January 2024.
+
+Posit has a [Shiny playlist on YouTube](https://www.youtube.com/playlist?list=PL9HYL-VRX0oRbLoj3FyL5zeASU5FMDgVe).
+
+Appsilon has an article on [How to Work with Bootstrap Themes in Shiny](https://appsilon.com/r-shiny-bslib/).
 
 # *Mastering Shiny* Notes
 

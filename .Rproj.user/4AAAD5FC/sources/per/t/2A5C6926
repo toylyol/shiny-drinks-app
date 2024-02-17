@@ -1,0 +1,27 @@
+{
+    "id": "2A5C6926",
+    "path": "~/GitHub/shiny-drinks-app/compiling_resources.Rmd",
+    "project_path": "compiling_resources.Rmd",
+    "type": "r_markdown",
+    "hash": "2930367932",
+    "contents": "",
+    "dirty": false,
+    "created": 1708120383976.0,
+    "source_on_save": false,
+    "relative_order": 3,
+    "properties": {
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "69,81",
+        "scrollLine": "49"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1708137386,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1708137386208,
+    "read_only": false,
+    "read_only_alternatives": []
+}

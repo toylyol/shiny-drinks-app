@@ -34,7 +34,7 @@ starbucks <- raw_data |>
   ) |> 
   select (-c(serv_size_m_l, saturated_fat_g, trans_fat_g, sodium_mg, total_carbs_g, fiber_g)) |>
   rename (Category = category, 
-          Product = product_name,
+          Drink = product_name,
           Size = size,
           Calories = calories,
           `Milk Type` = milk,
@@ -49,6 +49,9 @@ starbucks <- raw_data |>
 
 ui <- page_sidebar(
   
+  theme = bs_theme(preset = "minty",
+                   secondary = "#54b198"),
+  
   title = "Shiny Drinks",
   
   sidebar = sidebar(
@@ -59,15 +62,14 @@ ui <- page_sidebar(
                 multiple = TRUE,
                 selectize = TRUE), # create parent
     uiOutput("select_bev"), # name child
-    uiOutput("select_size") # name grandchild
-    
+    uiOutput("select_size"), # name grandchild
+    actionButton("reset_button", "Reset Filters")
   ), # end sidebar
   
   navset_pill(
     nav_panel(title = "Chart", plotOutput("chart")), 
     nav_panel(title = "Table", reactableOutput("table"))
   ) # end pills in main panel
-  
   
 )
 
@@ -77,32 +79,41 @@ server <- function(input, output, session) {
   # create dependent child input
   
   output$select_bev <- renderUI({
-    drinks <- starbucks %>%
-      filter(Category %in% input$select_cat) %>%
-      pull(Product) %>%
-      unique() %>%
+    drinks <- starbucks |> 
+      filter(Category %in% input$select_cat) |> 
+      pull(Drink) |>
+      unique() |>
       sort()
     
     selectInput("select_bev", 
-                label = "Drink Product",
+                label = "Drink",
                 choices = drinks,
-                multiple = TRUE
-    )
+                multiple = TRUE)
   })
   
-  # create dependent granchild input
+  # create dependent grandchild input
   
   output$select_size <- renderUI({
-    sizes <- starbucks %>%
-      filter(Product %in% input$select_bev) %>%
-      pull(Size) %>%
-      unique() %>%
+    sizes <- starbucks |>
+      filter(Drink %in% input$select_bev) |>
+      pull(Size) |>
+      unique() |>
       sort()
     
     selectInput("select_size", "Size",
                 choices = sizes,
-                multiple = TRUE
-    )
+                multiple = TRUE)
+  })
+  
+  # specify button action
+  
+  observeEvent(input$reset_button, {
+    updateSelectInput(inputId = "select_cat",
+                      choices=character(0))
+    updateSelectInput(inputId = "select_bev",
+                      choices=character(0))
+    updateSelectInput(inputId = "select_size",
+                      choices=character(0))
   })
   
   # filter dataset based on inputs and make reactive
@@ -112,12 +123,12 @@ server <- function(input, output, session) {
     if( !is.null(input$select_cat) & !is.null(input$select_bev) & !is.null(input$select_size) ){
       starbucks |>
         filter(Category %in% input$select_cat)|> 
-        filter(Product %in% input$select_bev) |> 
+        filter(Drink %in% input$select_bev) |> 
         filter(Size %in% input$select_size)  } else 
           if(!is.null(input$select_cat) & !is.null(input$select_bev) & is.null(input$select_size)){
             starbucks |>
               filter(Category %in% input$select_cat)|> 
-              filter(Product %in% input$select_bev)} else
+              filter(Drink %in% input$select_bev)} else
                 if(!is.null(input$select_cat) & is.null(input$select_bev) & is.null(input$select_size)){
                   starbucks |> filter(Category %in% input$select_cat)} else {
                     starbucks
@@ -155,7 +166,9 @@ shinyApp(ui, server)
 # TODO:
 # Choose different variable to scale radius.
 # Choose color scheme. 
+## Use {bslib} theme minty as base.
 # Choose different variable to tie to color scheme.
 # Fix coordinate system and legends.
 # Convert using ggplotly().
+# Remove category from legend.
 

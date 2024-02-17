@@ -78,6 +78,10 @@ Appsilon has an article on [How to Work with Bootstrap Themes in Shiny](https://
   year={2017}
 }
 
+The [{reactable} documentation](https://glin.github.io/reactable/reference/reactableTheme.html) provides a straightforward example for using reactableTheme() to add striped theme and highlight.
+
+[This StackOverflow forum](https://stackoverflow.com/questions/74222616/change-search-bar-text-in-reactable-table-in-r) made changing the reactable placeholder text super simple.
+
 # *Mastering Shiny* Notes
 
 See Chapter 2.2.8 for information on [action buttons](https://shiny.posit.co/r/articles/build/layout-guide/). There is further information on how to configure an action button with an [on-click event](https://mastering-shiny.org/basic-reactivity.html#on-click) in Chapter 3.3.5. It requires use of eventReactive().

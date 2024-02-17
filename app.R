@@ -6,51 +6,17 @@ packages <- c("shiny", "dplyr", "stringr", "ggplot2", "reactable", "bslib")
 invisible(lapply(packages, library, character.only = TRUE))
 
 
-# Load data
+# Source prep file
 
-raw_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-12-21/starbucks.csv',
-                            show_col_types = FALSE)
-
-
-# Clean up data for my purposes
-
-starbucks <- raw_data |>
-  mutate(category = case_when(str_detect(product_name, 
-                                         "Chai|Tea|tea") ~ "Tea",
-                              str_detect(product_name,
-                                         "Lemonade|Smoothie|Hot Chocolate|Fibre Powder|Refresher|Apple Spice|Crème Frappuccino Blended") ~ "Other",
-                              TRUE ~ "Coffee" ), .before = product_name
-  ) |> 
-  mutate(product_name = str_to_title(product_name)) |> 
-  mutate(size = str_to_title(size)) |>
-  mutate(whip = case_when(whip == 0 ~ "No", 
-                          whip == 1 ~ "Yes"),
-         milk = case_when(milk == 0 ~ "None",
-                          milk == 1 ~ "Nonfat",
-                          milk == 2 ~ "2%",
-                          milk == 3 ~ "Soy",
-                          milk == 4 ~ "Coconut",
-                          milk == 5 ~ "Whole")
-  ) |> 
-  select (-c(serv_size_m_l, saturated_fat_g, trans_fat_g, sodium_mg, total_carbs_g, fiber_g)) |>
-  rename (Category = category, 
-          Drink = product_name,
-          Size = size,
-          Calories = calories,
-          `Milk Type` = milk,
-          `Whipped Topping` = whip,
-          `Total Fat (g)` = total_fat_g,
-          `Cholesterol (mg)` = cholesterol_mg,
-          `Sugar (g)` = sugar_g,
-          `Caffeine (mg)` = caffeine_mg)
+source("prep.R")
 
 
-# Create the app itself
+# Create app itself
 
 ui <- page_sidebar(
   
   theme = bs_theme(preset = "minty",
-                   secondary = "#54b198"),
+                   secondary = "#5db69d"),
   
   title = "Shiny Drinks",
   
@@ -110,10 +76,6 @@ server <- function(input, output, session) {
   observeEvent(input$reset_button, {
     updateSelectInput(inputId = "select_cat",
                       choices=character(0))
-    updateSelectInput(inputId = "select_bev",
-                      choices=character(0))
-    updateSelectInput(inputId = "select_size",
-                      choices=character(0))
   })
   
   # filter dataset based on inputs and make reactive
@@ -154,7 +116,15 @@ server <- function(input, output, session) {
   
   output$table <- renderReactable({
 
-      reactable(dataset())
+      reactable(dataset(),
+                groupBy = "Category",
+                searchable = TRUE,
+                language = reactableLang(searchPlaceholder = "Search the table."),
+                resizable = TRUE,
+                striped = TRUE,
+                highlight = TRUE,
+                theme = reactableTheme(stripedColor = "#f2f9f7",
+                                       highlightColor = "#aedace"))
     
   })
   
@@ -167,8 +137,8 @@ shinyApp(ui, server)
 # Choose different variable to scale radius.
 # Choose color scheme. 
 ## Use {bslib} theme minty as base.
-# Choose different variable to tie to color scheme.
+# Tie milk type to color.
 # Fix coordinate system and legends.
 # Convert using ggplotly().
 # Remove category from legend.
-
+# Use shape of mark to represent category.

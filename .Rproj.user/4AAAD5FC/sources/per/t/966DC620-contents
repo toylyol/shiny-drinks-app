@@ -36,6 +36,3 @@ starbucks <- raw_data |>
           `Cholesterol (mg)` = cholesterol_mg,
           `Sugar (g)` = sugar_g,
           `Caffeine (mg)` = caffeine_mg)
-
-
-# Create custom color palette for bubble chart ----

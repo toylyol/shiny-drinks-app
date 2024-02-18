@@ -16,7 +16,8 @@ source("prep.R")
 ui <- page_sidebar(
   
   theme = bs_theme(preset = "minty",
-                   secondary = "#5db69d"),
+                   secondary = "#5db69d",
+                   danger = "#c2788d"),
   
   title = "Shiny Drinks",
   
@@ -29,7 +30,7 @@ ui <- page_sidebar(
                 selectize = TRUE), # create parent
     uiOutput("select_bev"), # name child
     uiOutput("select_size"), # name grandchild
-    actionButton("reset_button", "Reset Filters")
+    actionButton("reset_button", "Reset Filters", class = "btn-danger", icon = icon("trash"))
   ), # end sidebar
   
   navset_pill(
@@ -101,14 +102,33 @@ server <- function(input, output, session) {
   # create chart
   
   output$chart <- renderPlot({
-    
+
     ggplot() +
       geom_point(data = dataset(), 
                  aes(x = Calories, y = `Sugar (g)`, 
                      size = `Caffeine (mg)`, color = Category),
-                 alpha = 0.5) +
-      scale_size(range = c(0, 10)) + 
-      theme_minimal()
+                 alpha = 0.5,
+                 stroke = 0.5) +
+      scale_color_manual(values = c("Coffee" = "#77c1ad", 
+                                    "Tea" = "#016876", 
+                                    "Other" = "#9ae871")) +
+      scale_size(range = c(5, 10)) + 
+      guides(color = guide_legend(direction = "horizontal",
+                                  override.aes = list(size = 10,
+                                                      shape = 15),
+                                  order = 1),
+             size = guide_legend(direction = "horizontal",
+                                 order = 2)
+             ) +
+      labs(color = "Category: ",
+           size = "Caffeine (mg): ",
+           caption = "Color Scheme: Gramazio, Laidlaw, and Schloss' Colorgorical\nNutrition Information: Starbucks via TidyTuesday") +
+      theme_minimal() +
+      theme(
+        legend.position = "bottom",
+        legend.box = "vertical",
+        plot.margin = margin(25, 25, 10, 25)
+        )
     
   })
   
@@ -117,7 +137,6 @@ server <- function(input, output, session) {
   output$table <- renderReactable({
 
       reactable(dataset(),
-                groupBy = "Category",
                 searchable = TRUE,
                 language = reactableLang(searchPlaceholder = "Search the table."),
                 resizable = TRUE,
@@ -134,11 +153,6 @@ shinyApp(ui, server)
 
 
 # TODO:
-# Choose different variable to scale radius.
-# Choose color scheme. 
-## Use {bslib} theme minty as base.
-# Tie milk type to color.
-# Fix coordinate system and legends.
-# Convert using ggplotly().
-# Remove category from legend.
+# Fix coordinate system.
+# Make scatterplot interactive using {ggiraph}. Add tooltip.
 # Use shape of mark to represent category.

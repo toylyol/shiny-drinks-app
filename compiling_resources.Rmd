@@ -79,7 +79,11 @@ Allison Horst has a [succinct tutorial on {ggiraph}](https://allisonhorst.github
 
 There are [Shiny {ggiraph} examples](https://www.ardata.fr/ggiraph-book/shiny-examples.html) on the documentation site.
 
-The [third edition of the ggplot2 book](https://ggplot2-book.org/scales-colour#sec-legend-layout) helped me discover how to stack the horizonal guide legends using legend.box within theme().
+The [third edition of the ggplot2 book](https://ggplot2-book.org/scales-colour#sec-legend-layout) helped me discover how to stack the horizontal guide legends using legend.box within theme().
+
+https://stackoverflow.com/questions/62378430/how-to-download-graphs-which-are-dynamic-in-r-shiny
+
+Only a few shapes can have both fill and color (stroke): Shapes 21 to 26. See [this StackOverflow forum](https://stackoverflow.com/questions/15965870/fill-and-border-colour-in-geom-point-scale-colour-manual-in-ggplot)! Remember this if [changing the legend shape](https://stackoverflow.com/questions/27221011/fill-scale-is-not-shown-in-the-legend).
 
 
 # *Mastering Shiny* Notes

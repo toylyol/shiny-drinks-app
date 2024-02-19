@@ -95,6 +95,8 @@ The package author provided an easy way to make fot stay selected on click in [t
 
 [This StackOverflow forum's](https://stackoverflow.com/questions/69792233/how-i-can-align-to-the-left-on-shiny) provided a hack for left aligning the chart! I had to use the [float CSS property](https://www.w3schools.com/css/css_align.asp) to make changes, but it resulted in the chart being tiny: I had to change the height and width to >100%.
 
+Be sure to [comment out loading {shiny}](https://stackoverflow.com/questions/50999938/the-application-failed-to-start-exited-with-code-1-in-r-shiny) before trying to deploy to shinyapps.io!
+
 
 # *Mastering Shiny* Notes
 

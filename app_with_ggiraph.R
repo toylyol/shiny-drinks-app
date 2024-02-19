@@ -1,9 +1,13 @@
 
 # Load packages
 
-packages <- c("shiny", "dplyr", "stringr", "ggplot2", "reactable", "bslib", "ggiraph")
-
-invisible(lapply(packages, library, character.only = TRUE))
+# library(shiny)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(reactable)
+library(bslib)
+library(ggiraph)
 
 
 # Source prep file
@@ -269,6 +273,4 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 
 # TODO:
-# Left-align chart.
-# Write help page.
-# Bring selected bubble to front, if possible.
+# Bring selected bubble to front.

@@ -37,33 +37,3 @@ starbucks <- raw_data |>
          `Cholesterol (mg)` = cholesterol_mg,
          `Sugar (g)` = sugar_g,
          `Caffeine (mg)` = caffeine_mg)
-
-
-# Write instructions for help page ----
-
-# Why are bubbles turning red as I'm exploring the chart?
-#   When you click on a bubble, it turns red. Click on the same bubble again to return the bubble to its original color.
-# 
-# How do I remove just one filter option instead of resetting all of them?
-#   Click on the option that you want to remove so that it is highlighted. Select "Delete" on your keyboard.
-# 
-# How did you come up with the color scheme?
-#   The Bootswatch minty color scheme available through {bslib} was used to style the app. The bubble chart color scheme was created using Gramazio, Laidlaw, and Schloss' [Colorgorical](http://vrl.cs.brown.edu/color). They wrote a [paper](http://vrl.cs.brown.edu/color/pdf/colorgorical.pdf?v=5dd92af6d1e6c5584236275adc769e82) about it for *IEEE Transactions on Visualization and Computer Graphics* in 2017.
-# 
-# How did you make the app?
-#   See the code on [GitHub](https://github.com/toylyol/shiny-drinks-app)!
-#   
-# Where did you get this nutrition information?
-#   The data are from Starbucks by way of the [TidyTuesday repo](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-12-21/readme.md).
-# 
-# I want to zoom in a specific part of the chart. Is that possible?
-#   When you hover over the chart, a menu appears at the top. Use the second icon from the left (a maginifying glass with a rectangle in the middle) to activate the zoom feature. Once it is activated, click and drag over the part of the chart where you want to zoom in.
-# 
-# Oh no, I zoomed in the chart way too far!
-#   Don't worry: You can reset the chart. Use the icon that looks like four arrows pointing outward toward four corners.
-# 
-# Can I download the chart?
-#  Click on the download arrow icon on the far-right to save a copy of the chart as it appears on your screen.
-#
-# Can I make the table columns wider?
-#   Absolutely, hover over the column header you want to move until a symbol that looks like parallel lines with arrows pointing in opposite directions appears Click and drag the column header until it wide enough for you.

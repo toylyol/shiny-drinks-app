@@ -25,14 +25,20 @@ starbucks <- raw_data |>
                           milk == 4 ~ "Coconut",
                           milk == 5 ~ "Whole")
   ) |> 
-  select (-c(serv_size_m_l, saturated_fat_g, trans_fat_g, sodium_mg, total_carbs_g, fiber_g)) |>
-  rename (Category = category, 
-          Drink = product_name,
-          Size = size,
-          Calories = calories,
-          `Milk Type` = milk,
-          `Whipped Topping` = whip,
-          `Total Fat (g)` = total_fat_g,
-          `Cholesterol (mg)` = cholesterol_mg,
-          `Sugar (g)` = sugar_g,
-          `Caffeine (mg)` = caffeine_mg)
+  select(-c(serv_size_m_l, saturated_fat_g, trans_fat_g, sodium_mg, total_carbs_g, fiber_g)) |>
+  mutate(id = row_number()) |>
+  rename(Category = category, 
+         Drink = product_name,
+         Size = size,
+         Calories = calories,
+         `Milk Type` = milk,
+         `Whipped Topping` = whip,
+         `Total Fat (g)` = total_fat_g,
+         `Cholesterol (mg)` = cholesterol_mg,
+         `Sugar (g)` = sugar_g,
+         `Caffeine (mg)` = caffeine_mg)
+
+
+# Write instructions for help page ----
+
+instructions <- "This is a test.\nColor Scheme: Gramazio, Laidlaw, and Schloss' Colorgorical\nNutrition Information: Starbucks via TidyTuesday"

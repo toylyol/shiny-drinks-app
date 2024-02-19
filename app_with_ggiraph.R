@@ -1,7 +1,7 @@
 
 # Load packages
 
-packages <- c("shiny", "dplyr", "stringr", "ggplot2", "reactable", "bslib")
+packages <- c("shiny", "dplyr", "stringr", "ggplot2", "reactable", "bslib", "ggiraph")
 
 invisible(lapply(packages, library, character.only = TRUE))
 
@@ -22,7 +22,6 @@ ui <- page_sidebar(
   title = "Shiny Drinks",
   
   sidebar = sidebar(
-    
     selectInput("select_cat", 
                 label = "Category", 
                 choices = sort(unique(starbucks$Category)),
@@ -34,8 +33,9 @@ ui <- page_sidebar(
   ), # end sidebar
   
   navset_pill(
-    nav_panel(title = "Chart", plotOutput("chart")), 
-    nav_panel(title = "Table", reactableOutput("table"))
+    nav_panel(title = "Chart", girafeOutput("chart")), 
+    nav_panel(title = "Table", reactableOutput("table")),
+    nav_panel(title = "Help", p(instructions))
   ) # end pills in main panel
   
 )
@@ -99,28 +99,35 @@ server <- function(input, output, session) {
     
   })
   
-  ## create chart
+  ## render interactive chart
   
-  output$chart <- renderPlot({
-
-    ggplot() +
-      geom_point(data = dataset(), 
-                 aes(x = Calories, y = `Sugar (g)`, 
-                     size = `Caffeine (mg)`, fill = Category),
-                 alpha = 0.5,
-                 shape = 21, # ensure shape has color and fill property
-                 color = "darkgray") + # update stoke color
+  output$chart <- renderGirafe({
+    
+    bubble_chart <- ggplot(data = dataset()) +
+      geom_point_interactive(aes(x = Calories, y = `Sugar (g)`, 
+                                 size = `Caffeine (mg)`, fill = Category,
+                                 tooltip = paste("Category:", Category, 
+                                                 "\nDrink:", Drink,
+                                                 "\nSize:", Size,
+                                                 "\nWhipped Topping:", `Whipped Topping`,
+                                                 "\nCalories:", Calories,
+                                                 "\nSugar (g):", `Sugar (g)`,
+                                                 "\nCaffeine (mg):", `Caffeine (mg)`),
+                                 data_id = id),
+                             alpha = 0.5,
+                             stroke = .25,
+                             shape = 21, # ensure shape has color and fill property
+                             color = "gray35") + # update stoke color
       scale_fill_manual(values = c("Coffee" = "#77c1ad", 
-                                    "Tea" = "#016876", 
-                                    "Other" = "#9ae871")) +
+                                   "Tea" = "#016876", 
+                                   "Other" = "#9ae871")) +
       scale_size(range = c(5, 10)) +  # set point size range
       guides(fill = guide_legend(direction = "horizontal",
                                  override.aes = list(size = 10,
-                                                      shape = 22), # ensure shape can have fill
-                                  order = 1),
+                                                     shape = 22), # ensure shape can have fill
+                                 order = 1),
              size = guide_legend(direction = "horizontal",
-                                 order = 2)
-             ) +
+                                 order = 2)) +
       labs(x = "\nCalories",
            y = "Sugar (g)\n",
            fill = "Category: ",
@@ -130,11 +137,27 @@ server <- function(input, output, session) {
         legend.position = "bottom", # put legends at bottom
         legend.box = "vertical", # stack legends
         legend.box.margin=margin(25,0,0,0), # add space between plot and legend
-        plot.margin = margin(50, 10, 10, 25), # add margin between pills and plot
-        panel.grid.minor = element_blank() 
-        ) +
+        plot.margin = margin(50, 10, 10, 10), # add margin between pills and plot
+        panel.grid.minor = element_blank(), 
+        panel.grid.major = element_line(linewidth = .75, 
+                                        linetype = "dotted"),
+      ) +
       coord_cartesian(expand = FALSE,
                       clip = "off") 
+    
+    x <- girafe(ggobj = bubble_chart)
+    
+    x <- girafe_options(x,
+                        opts_toolbar(saveaspng = TRUE,
+                                     position = c("top"),
+                                     pngname = "shiny-drinks-download"), # set default name
+                        opts_zoom(min = 1, max = 5),
+                        opts_hover(css = "opacity: 1; stroke-width: 1; cursor:crosshair"),
+                        opts_hover_inv(css = "opacity: 0.2;"),
+                        opts_selection(only_shiny = FALSE, type = "single") # keep bubble selected on click
+    )
+    
+    if( interactive() ) print(x)
     
   })
   
@@ -157,8 +180,9 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 
-
 # TODO:
-# Fix coordinate system.
-# Make scatterplot interactive using {ggiraph}. Add tooltip.
-# Use shape of mark to represent category.
+# Left-align chart.
+# Write help page.
+# Make chart fullscreen, if possible.
+# Bring selected bubble to front, if possible.
+# Go back to short-form ggiraph with list of options.

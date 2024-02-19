@@ -102,25 +102,23 @@ server <- function(input, output, session) {
   ## create chart
   
   output$chart <- renderPlot({
-
-    ggplot() +
-      geom_point(data = dataset(), 
-                 aes(x = Calories, y = `Sugar (g)`, 
+    
+    ggplot(data = dataset()) +
+      geom_point(aes(x = Calories, y = `Sugar (g)`, 
                      size = `Caffeine (mg)`, fill = Category),
                  alpha = 0.5,
                  shape = 21, # ensure shape has color and fill property
                  color = "darkgray") + # update stoke color
       scale_fill_manual(values = c("Coffee" = "#77c1ad", 
-                                    "Tea" = "#016876", 
-                                    "Other" = "#9ae871")) +
+                                   "Tea" = "#016876", 
+                                   "Other" = "#9ae871")) +
       scale_size(range = c(5, 10)) +  # set point size range
       guides(fill = guide_legend(direction = "horizontal",
                                  override.aes = list(size = 10,
-                                                      shape = 22), # ensure shape can have fill
-                                  order = 1),
+                                                     shape = 22), # ensure shape can have fill
+                                 order = 1),
              size = guide_legend(direction = "horizontal",
-                                 order = 2)
-             ) +
+                                 order = 2)) +
       labs(x = "\nCalories",
            y = "Sugar (g)\n",
            fill = "Category: ",
@@ -132,7 +130,7 @@ server <- function(input, output, session) {
         legend.box.margin=margin(25,0,0,0), # add space between plot and legend
         plot.margin = margin(50, 10, 10, 25), # add margin between pills and plot
         panel.grid.minor = element_blank() 
-        ) +
+      ) +
       coord_cartesian(expand = FALSE,
                       clip = "off") 
     
@@ -159,6 +157,6 @@ shinyApp(ui, server)
 
 
 # TODO:
-# Fix coordinate system.
-# Make scatterplot interactive using {ggiraph}. Add tooltip.
-# Use shape of mark to represent category.
+# Make chart fonts larger. Use Google font that matches minty theme.
+# Add info button with sources.
+# Add help button with instructions.

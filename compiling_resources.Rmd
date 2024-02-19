@@ -85,6 +85,10 @@ https://stackoverflow.com/questions/62378430/how-to-download-graphs-which-are-dy
 
 Only a few shapes can have both fill and color (stroke): Shapes 21 to 26. See [this StackOverflow forum](https://stackoverflow.com/questions/15965870/fill-and-border-colour-in-geom-point-scale-colour-manual-in-ggplot)! Remember this if [changing the legend shape](https://stackoverflow.com/questions/27221011/fill-scale-is-not-shown-in-the-legend).
 
+Ensure that [data_id](https://www.ardata.fr/ggiraph-book/) is a unique identifier!
+
+The package author provided an easy way to make fot stay selected on click in [this StackOverflow forum](https://stackoverflow.com/questions/67478061/how-do-i-make-the-ggiraph-hover-functionality-stick-on-click). 
+
 
 # *Mastering Shiny* Notes
 
